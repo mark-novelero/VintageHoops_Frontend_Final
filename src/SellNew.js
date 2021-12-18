@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button } from "semantic-ui-react"
+import { Form, Button } from 'semantic-ui-react'
 import './App.css';
 import {Link} from 'react-router-dom'
 
@@ -8,14 +8,14 @@ export default class SellNew extends Component {
   
 
  state = {
-     size: "", 
-     desc: "", 
+     size: '', 
+     desc: '', 
      seller_id: 1, 
      team: 'na',
      image: '', 
      price: 0, 
-     title: "", 
-     product_type: "", 
+     title: '', 
+     product_type: '', 
  }
 
 
@@ -81,11 +81,11 @@ handleSubmit = (e) => {
 
   return(
 
-  <div className = "new-item-form">
-    <div className = "main-form">
+  <div className = 'new-item-form'>
+    <div className = 'main-form'>
 
-      { this.props.newItemDisplay === false ? <h2 className = "new-product-form">New Product Form</h2> 
-      : <h2 className = "listing-created">Product Listing Created!</h2> }
+      { this.props.newItemDisplay === false ? <h2 className = 'new-product-form'>New Product Form</h2> 
+      : <h2 className = 'listing-created'>Product Listing Created!</h2> }
 
       { this.props.newItemDisplay === false ? 
       <Form onSubmit = {this.handleSubmit} inverted>
@@ -123,8 +123,8 @@ handleSubmit = (e) => {
 
     { this.props.newItemDisplay === false ? null 
     : 
-    <Link to = "/userpage">
-      <Button color = "red" onClick = {()=> this.props.newItemPublished()}>See New Listing</Button>
+    <Link to = '/userpage'>
+      <Button color = 'red' onClick = {()=> this.props.newItemPublished()}>See New Listing</Button>
     </Link> }
     
     </div>

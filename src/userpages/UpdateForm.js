@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button } from "semantic-ui-react"
+import { Form, Button } from 'semantic-ui-react'
 import './userpage.css';
 import {Link} from 'react-router-dom'
 
@@ -84,18 +84,18 @@ handleSubmit = (e) => {
  render() {
   
   return(
-  <div className = "new-item-form">
-      <div className = "main-form">
-        {this.props.newItemDisplay === false ? <h2 className = "new-product-form">Product Update</h2> : <h2 className = "listing-updated">Listing Updated</h2>}
+  <div className = 'new-item-form'>
+      <div className = 'main-form'>
+        {this.props.newItemDisplay === false ? <h2 className = 'new-product-form'>Product Update</h2> : <h2 className = 'listing-updated'>Listing Updated</h2>}
         {this.props.newItemDisplay === false ? 
             <Form onSubmit = {this.handleSubmit} inverted>
                 <Form.Group widths='equal' center>
-                    <Form.Input className = "update-input" onChange = {(e) => this.handleFormInputTitle(e)}  fluid label='Product Title' placeholder= {this.props.selectUserProduct.title} />
+                    <Form.Input className = 'update-input' onChange = {(e) => this.handleFormInputTitle(e)}  fluid label='Product Title' placeholder= {this.props.selectUserProduct.title} />
                 </Form.Group>  
                 <Form.Group widths='equal'>  
-                    <Form.Input className = "update-input" onChange = {(e) => this.handleFormInputImage(e)}  fluid label='Image Url' placeholder= {this.props.selectUserProduct.image}></Form.Input>  
-                    <Form.Input className = "update-input" onChange = {(e) => this.handleFormInputPrice(e)} fluid label='Price' placeholder= {this.props.selectUserProduct.price}  />
-                    <Form.Input className = "update-input" onChange = {(e) => this.handleFormInputDesc(e)} fluid label='Description' placeholder={this.props.selectUserProduct.desc}  />
+                    <Form.Input className = 'update-input' onChange = {(e) => this.handleFormInputImage(e)}  fluid label='Image Url' placeholder= {this.props.selectUserProduct.image}></Form.Input>  
+                    <Form.Input className = 'update-input' onChange = {(e) => this.handleFormInputPrice(e)} fluid label='Price' placeholder= {this.props.selectUserProduct.price}  />
+                    <Form.Input className = 'update-input' onChange = {(e) => this.handleFormInputDesc(e)} fluid label='Description' placeholder={this.props.selectUserProduct.desc}  />
                 </Form.Group> 
                 <Form.Group widths='equal'>
                     <Form.Field onChange = {(e) => this.handleSize(e)} label='Size' control='select'>
@@ -122,7 +122,7 @@ handleSubmit = (e) => {
                 <Button type='submit'>Submit</Button>
             </Form> 
             : 
-            <Link to= "/useritem"><Button onClick = {()=> this.props.newItemPublished() }>See Updated Item</Button></Link>}
+            <Link to= '/useritem'><Button onClick = {()=> this.props.newItemPublished() }>See Updated Item</Button></Link>}
         </div>
     </div>
     )

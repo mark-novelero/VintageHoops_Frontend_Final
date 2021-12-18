@@ -1,7 +1,7 @@
 import './App.css';
-import Home from "./Home"
+import Home from './Home'
 import React, { Component } from 'react'
-import {Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import MainMarket from './main_market/MainMarket';
 import UserPage from './userpages/UserPage';
 import SellNew from './SellNew';
@@ -19,21 +19,20 @@ import ScrollToTop from './header/ScrollToTop';
 
 export default class App extends Component {
  
-
   state = {
    all_players: [], 
    all_products: [], 
    all_sellers: [], 
    currentSeller: [],
-   currentUser: "", 
+   currentUser: '', 
    current_user_products: [], 
    newItemPublished: false, 
-   token: "false", 
+   token: 'false', 
    selectMarketItem: {}, 
    selectUserProduct: {}, 
    cartItems: [],
-   sort: "none", 
-   filter: "all", 
+   sort: 'none', 
+   filter: 'all', 
    deleted: false, 
    cartCount: 0, 
    itemAdded: false, 
@@ -41,19 +40,21 @@ export default class App extends Component {
    newuser: false, 
    titlePage: true,
    radioButtonOn: false, 
-   searchText: "", 
+   searchText: '', 
    loginError: null,
    loggedOut: false
   }
 
 
 componentWillMount(){
+
     localStorage.getItem('sellerProducts') && this.setState({
       current_user_products: JSON.parse(localStorage.getItem('sellerProducts'))})
 
     localStorage.getItem('currentUser') && this.setState({
       currentUser: localStorage.currentUser
     }) 
+
     localStorage.getItem('homePage') && this.setState({
       titlePage: localStorage.homePage
     })
@@ -75,7 +76,7 @@ componentDidMount(){
   ))
 
   fetch('http://localhost:3000/sellers', {
-    method: "GET", 
+    method: 'GET', 
     headers: {
       Authorization: `Bearer ${localStorage.token}`
       }
@@ -89,28 +90,26 @@ componentDidMount(){
 
     if(localStorage.userToken === undefined){
       this.setState({
-        token: "false"
+        token: 'false'
       })
     } 
 } 
 
+componentWillUpdate(nextState) {
 
-
-componentWillUpdate(nextProps, nextState){
   localStorage.setItem('sellerProducts', JSON.stringify(nextState.current_user_products))
   localStorage.setItem('currentUser', this.state.currentUser)
   localStorage.setItem('homePage', this.state.titlePage)
   localStorage.setItem('userToken', this.state.token)
+
 }
 
-
-
-getSeller = (sellerObj) =>{
+getSeller = (sellerObj) => {
   
   fetch('http://localhost:3000/login', {
-    method: "POST",
+    method: 'POST',
     headers: {
-     "Content-Type": "application/json",
+     'Content-Type': 'application/json',
    },
     body: JSON.stringify({
       username: sellerObj.username, 
@@ -119,7 +118,7 @@ getSeller = (sellerObj) =>{
    })
     .then (res => {
       if(res.ok !== true){
-        throw Error("wrong username or password")
+        throw Error('wrong username or password')
       }
       return res.json();
     })
@@ -134,22 +133,22 @@ getSeller = (sellerObj) =>{
     })
     .catch(err => {
       this.setState({
-        loginError: "wrong username or password"
+        loginError: 'wrong username or password'
       })
     })
+
 }
 
+localToken = (obj) => {
 
-localToken =(obj)=>{
-
-  if (localStorage.token !== "undefined"){
+  if (localStorage.token !== 'undefined'){
     this.setState({
       currentUser: obj.username,
-      token: "true" 
+      token: 'true' 
     })
   } else {
     this.setState({
-      currentUser: "", 
+      currentUser: '', 
       token: false
     })
   }
@@ -159,7 +158,6 @@ localToken =(obj)=>{
     currentSeller: sellerNow
   })
 }
-
 
 createNewProduct =(obj)=> {
 
@@ -177,9 +175,9 @@ createNewProduct =(obj)=> {
   }
 
   fetch('http://localhost:3000/products', {
-     method: "POST",
+     method: 'POST',
      headers: {
-     "Content-Type": "application/json",
+     'Content-Type': 'application/json',
    },
       body: JSON.stringify(newProduct),
    })
@@ -190,17 +188,14 @@ createNewProduct =(obj)=> {
         all_products: [...this.state.all_products, newItem]
       }) 
     })
-
     this.newItemPublished()
 }
-
 
 newItemPublished = () => {
   this.setState({
     newItemPublished: !this.state.newItemPublished
   })
 }
-
 
 updateProduct =(obj)=> {
 
@@ -220,9 +215,9 @@ updateProduct =(obj)=> {
   }
 
   fetch(`http://localhost:3000/products/${obj.id}`, {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
-     "Content-Type": "application/json",
+     'Content-Type': 'application/json',
    },
     body: JSON.stringify(updatedProduct),
    })
@@ -238,13 +233,11 @@ updateProduct =(obj)=> {
     this.newItemPublished()
 }
 
-
 grabUserObj = (obj) => {
   this.setState({
     selectUserProduct: obj
   })
 }
-
 
 grabMarketItem = (obj) => {
   this.setState({
@@ -252,15 +245,13 @@ grabMarketItem = (obj) => {
   })
 }
 
-
 sortProducts = (sortType)=>{
   this.setState({
    radioButtonOn: !this.radioButtonOn,
    all_products: this.state.all_products.sort(
-   (a,b) => sortType === "Price" ? a.price - b.price : a.name.localeCompare(b.name) )
+   (a,b) => sortType === 'Price' ? a.price - b.price : a.name.localeCompare(b.name) )
   })
 }
-
 
 filterProducts = (type) => {
   this.setState({
@@ -268,16 +259,15 @@ filterProducts = (type) => {
   })
 }
  
-
 eraser = (obj) => {
 
   if(window.confirm('Are you sure?'))
   {
     fetch(`http://localhost:3000/products/${obj.id}`, {
-      method: "DELETE",
+      method: 'DELETE',
     })
       .then((r) => r.json())
-      .then(() => console.log("Deleted"))
+      .then(() => console.log('Deleted'))
     }
 
     const updatedUserProducts = this.state.current_user_products.filter(product=> product.id !== obj.id)
@@ -293,13 +283,11 @@ eraser = (obj) => {
     this.deleteStateDisplay()    
 }
 
-
 deleteStateDisplay = () => {
   this.setState({
     deleted: !this.state.deleted
   })
 }
-
 
 addItemToCart = (obj) => {
   
@@ -314,13 +302,11 @@ addItemToCart = (obj) => {
   })
 }
 
-
 itemAddedFunc = ()=> {
   this.setState({
     itemAdded: false
   }) 
 }
-
 
 newUserCreation = (obj) => {
   
@@ -330,9 +316,9 @@ newUserCreation = (obj) => {
   }
 
   fetch('http://localhost:3000/sellers', {
-     method: "POST",
+     method: 'POST',
      headers: {
-     "Content-Type": "application/json",
+     'Content-Type': 'application/json',
      credentials: 'include'
    },
       body: JSON.stringify(newUser),
@@ -346,14 +332,12 @@ newUserCreation = (obj) => {
    })
 }
 
-
 changeTitlePage = () => {
   this.setState({
     titlePage: !this.state.titlePage, 
     newuser: !this.state.newuser 
   })
 }
-
 
 removeCartItem = (obj) => {
   const updatedCartItems = this.state.cartItems.filter(product=> product.id !== obj.id)
@@ -365,7 +349,6 @@ removeCartItem = (obj) => {
   })
 }
 
-
 getUserProducts = () => {
   const userProducts = this.state.all_products.filter(products => products.seller_id === this.state.currentSeller.id)
   
@@ -374,22 +357,18 @@ getUserProducts = () => {
   })
 }
 
-
 getSearchText = (e) => {
   this.setState({
     searchText: e.target.value 
   })
 }
 
-
-
 resetSearchText = () => {
   this.setState({
-    searchText: "",
-    filter: "all"
+    searchText: '',
+    filter: 'all'
   })
 }
-
 
 logOut = () => {
   window.localStorage.clear()
@@ -397,12 +376,11 @@ logOut = () => {
 }
 
 
-
 render() {
 
   let updateProducts = []
 
-  if(this.state.filter === "all"){
+  if(this.state.filter === 'all'){
    updateProducts = this.state.all_products
   }else{
    updateProducts = this.state.all_products.filter(product => product.product_type === this.state.filter)
@@ -411,84 +389,84 @@ render() {
   const filteredAllProducts = this.state.all_products.filter(product => product.title.toLowerCase().includes(this.state.searchText.toLowerCase()))
 
 
-
   return(
     
-   <div className = "login">
+   <div className='login' >
 
     { this.state.loggedOut === true ? null : 
-    <FixedHeader  token = {this.state.token} cartCount = {this.state.cartCount} 
-                  changeTitlePage = {this.changeTitlePage} itemAdded = {this.state.itemAdded}
-                  itemAddedFunc = {this.itemAddedFunc} currentUser = {this.state.currentUser}
-                  logOut = {this.logOut}>
-    </FixedHeader> }
+      <FixedHeader  token={ this.state.token } cartCount={ this.state.cartCount } 
+                    changeTitlePage={ this.changeTitlePage } itemAdded={ this.state.itemAdded }
+                    itemAddedFunc={ this.itemAddedFunc } currentUser={ this.state.currentUser }
+                    logOut={ this.logOut } >
+      </FixedHeader> 
+    }
 
-    <ScrollToTop scrollStepInPx= "50" delayInMs= "8"></ScrollToTop>
+    <ScrollToTop scrollStepInPx='50' delayInMs='8' ></ScrollToTop>
 
     <Switch>
 
-    <Route path = "/payment">
-      <PaymentForm cartSum = {this.state.cartSum} cartItems = {this.state.cartItems}></PaymentForm>   
+    <Route path='/payment' >
+      <PaymentForm cartSum={ this.state.cartSum } cartItems={ this.state.cartItems }></PaymentForm>   
     </Route> 
 
-    <Route path = "/updateform">
-      <UpdateForm token = {this.state.token} newItemDisplay = {this.state.newItemPublished}
-                  selectUserProduct = {this.state.selectUserProduct} updateProduct = {this.updateProduct}
-                  currentSeller = {this.state.currentSeller} newItemPublished = {this.newItemPublished}>
+    <Route path='/updateform' >
+      <UpdateForm token={ this.state.token } newItemDisplay={ this.state.newItemPublished }
+                  selectUserProduct={ this.state.selectUserProduct } updateProduct={ this.updateProduct }
+                  currentSeller={ this.state.currentSeller } newItemPublished={ this.newItemPublished } >
       </UpdateForm>
     </Route>
 
-    <Route path = "/newuser">
-      <NewUser newUserCreation = {this.newUserCreation} newUser = {this.state.newuser} 
-               changeTitlePage = {this.changeTitlePage}>
+    <Route path='/newuser' >
+      <NewUser newUserCreation={ this.newUserCreation } newUser={ this.state.newuser } 
+               changeTitlePage={ this.changeTitlePage } >
       </NewUser>
     </Route>
 
-    <Route path = "/cart">
-      <CartHolder cartItems = {this.state.cartItems} cartCount = {this.state.cartCount}
-                  cartSum = {this.state.cartSum} token = {this.state.token} removeCartItem = {this.removeCartItem}>
+    <Route path='/cart'>
+      <CartHolder cartItems={ this.state.cartItems } cartCount={ this.state.cartCount }
+                  cartSum={ this.state.cartSum } token={ this.state.token } removeCartItem={ this.removeCartItem } >
       </CartHolder>
     </Route>
 
-    <Route path = "/marketitem">
-      <MarketItemCard selectMarketItem = {this.state.selectMarketItem} token = {this.state.token}
-                      addItemToCart = {this.addItemToCart} cartCount = {this.state.cartCount}
-                      itemAdded = {this.state.itemAdded} itemAddedFunc = {this.itemAddedFunc} deleteStateDisplay = {this.deleteStateDisplay}
-                      cartCount = {this.state.cartCount} >
+    <Route path='/marketitem' >
+      <MarketItemCard selectMarketItem={ this.state.selectMarketItem } token={ this.state.token }
+                      addItemToCart={ this.addItemToCart } cartCount={ this.state.cartCount }
+                      itemAdded={ this.state.itemAdded } itemAddedFunc={ this.itemAddedFunc } deleteStateDisplay={ this.deleteStateDisplay }
+                      cartCount={ this.state.cartCount } >
       </MarketItemCard>
     </Route>
 
-    <Route path = "/useritem">
-      <UserItem eraser = {this.eraser} selectUserProduct = {this.state.selectUserProduct} token = {this.state.token}
-                deleteState = {this.deleteStateDisplay} deleted = {this.state.deleted} cartCount = {this.state.cartCount}>
+    <Route path='/useritem'>
+      <UserItem eraser={ this.eraser } selectUserProduct={ this.state.selectUserProduct } token={ this.state.token }
+                deleteState={ this.deleteStateDisplay } deleted={ this.state.deleted } cartCount={ this.state.cartCount } >
       </UserItem> 
     </Route>
 
-    <Route path = "/sell">
-      <SellNew token = {this.state.token} newProduct = {this.createNewProduct} newItemPublished = {this.newItemPublished}
-               newItemDisplay = {this.state.newItemPublished} cartCount = {this.state.cartCount} currentSeller = {this.state.currentSeller}>
+    <Route path='/sell'>
+      <SellNew token={ this.state.token } newProduct={ this.createNewProduct } newItemPublished={ this.newItemPublished }
+               newItemDisplay={ this.state.newItemPublished } cartCount={ this.state.cartCount } currentSeller={ this.state.currentSeller } >
       </SellNew>
     </Route>
   
-    <Route path = "/userpage">
-      <UserPage token = {this.state.token} userProducts = {this.state.current_user_products} selectUserProduct = {this.state.selectUserProduct}
-                grabUserObj= {this.grabUserObj} currentUser = {this.state.currentUser} cartCount = {this.state.cartCount}>
+    <Route path='/userpage'>
+      <UserPage token={ this.state.token } userProducts={ this.state.current_user_products } selectUserProduct={ this.state.selectUserProduct }
+                grabUserObj={ this.grabUserObj } currentUser={ this.state.currentUser } cartCount={ this.state.cartCount } >
       </UserPage>
     </Route>
 
-    <Route path = "/main">
-      <MainMarket radioButtonOn = {this.state.radioButtonOn} grabMarketItem = {this.grabMarketItem} token = {this.state.token} 
-                  searchFilteredProducts = {filteredAllProducts} sortProducts = {this.sortProducts} filterProducts = {this.filterProducts} 
-                  updateProducts = {updateProducts} cartCount = {this.state.cartCount} getSearchText = {this.getSearchText} 
-                  searchText = {this.state.searchText} resetSearchText = {this.resetSearchText}>
+    <Route path='/main'>
+      <MainMarket radioButtonOn={ this.state.radioButtonOn } grabMarketItem={ this.grabMarketItem } token={ this.state.token } 
+                  searchFilteredProducts={ filteredAllProducts } sortProducts={ this.sortProducts } filterProducts={ this.filterProducts } 
+                  updateProducts={ updateProducts } cartCount={ this.state.cartCount } getSearchText={ this.getSearchText } 
+                  searchText={ this.state.searchText } resetSearchText={ this.resetSearchText } >
       </MainMarket>
     </Route>
     
-    <Route path = "/">
-      <Home getSeller = {this.getSeller} token= {this.state.token} currentUser = {this.state.currentUser}
-            changeTitlePage = {this.changeTitlePage} titlePage = {this.state.titlePage}
-            loginError = {this.state.loginError} setLocalStorageData = {this.setLocalStorageData}
-            getLocalStorageData = {this.getLocalStorageData} userToken = {this.state.userToken}>
+    <Route path = '/'>
+      <Home getSeller={ this.getSeller } token={ this.state.token } currentUser={ this.state.currentUser }
+            changeTitlePage={ this.changeTitlePage } titlePage={ this.state.titlePage }
+            loginError={ this.state.loginError } setLocalStorageData={ this.setLocalStorageData }
+            getLocalStorageData={ this.getLocalStorageData } userToken={ this.state.userToken } >
       </Home>
     </Route>
         

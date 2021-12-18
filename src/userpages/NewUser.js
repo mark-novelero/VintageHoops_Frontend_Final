@@ -1,5 +1,5 @@
-import { Button } from "semantic-ui-react"
-import "./userpage.css"
+import { Button } from 'semantic-ui-react'
+import './userpage.css'
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 
@@ -9,9 +9,9 @@ export default class NewUser extends Component {
  
 
 state = {
-   username: "", 
-   password: "",  
-   registrationErrors: ""
+   username: '', 
+   password: '',  
+   registrationErrors: ''
 }
 
 
@@ -43,35 +43,35 @@ handleSubmit = (e) =>{
 render() {
 
   return(
-    <div className = "new-user">   
+    <div className = 'new-user'>   
       <br></br>
-      <h2 className = "new-product-form">Registration Form</h2> 
+      <h2 className = 'new-product-form'>Registration Form</h2> 
 
-      <div className = "new-user-form">
+      <div className = 'new-user-form'>
         {this.props.newUser === false ? 
           <form onSubmit = {this.handleSubmit}>
             <input  
               onChange = {(e) => this.handleUserName(e)} 
-              className = "new-username" 
-              placeholder = "Create Username"
-              name= "username" 
+              className = 'new-username' 
+              placeholder = 'Create Username'
+              name= 'username' 
               required>  
             </input>
 
             <input 
               onChange = {(e) => this.handlePassword(e)} 
-              className = "new-user-password" 
-              placeholder = "Create Password"
-              name = "password" 
+              className = 'new-user-password' 
+              placeholder = 'Create Password'
+              name = 'password' 
               required>
             </input>
             <br></br>
-            <button className = "newuser-button">Submit</button>
+            <button className = 'newuser-button'>Submit</button>
           </form> 
         : 
         <div>
-          <h1 className = "newuser-registration">Welcome! Please return to the home page and log in.</h1>
-          <Link to = "/"><Button onClick = {() => {this.props.changeTitlePage()}}>Home</Button></Link>
+          <h1 className = 'newuser-registration'>Welcome! Please return to the home page and log in.</h1>
+          <Link to = '/'><Button onClick = {() => {this.props.changeTitlePage()}}>Home</Button></Link>
         </div>}
       </div>
       <br></br>     

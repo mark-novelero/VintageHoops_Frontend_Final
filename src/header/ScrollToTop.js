@@ -10,7 +10,7 @@ export default class ScrollToTop extends Component {
  }
 
 componentDidMount() {
-     document.addEventListener("scroll", () => {
+     document.addEventListener('scroll', () => {
         if (window.scrollY > 170){
              this.setState({
                  topPosition: true
@@ -41,9 +41,9 @@ scrollToTop = () => {
  renderGoTopIcon = () => {
      if(this.state.topPosition) {
         return (
-            <div className = "move-up">
+            <div className = 'move-up'>
                 <span>
-                    <i class="angle double up icon" id = "double-arrow" onClick = {this.scrollToTop}></i>
+                    <i class='angle double up icon' id = 'double-arrow' onClick = {this.scrollToTop}></i>
                 </span>
             </div>
         )

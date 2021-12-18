@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Divider, Form, Button, Segment} from "semantic-ui-react"
+import { Grid, Divider, Form, Button, Segment} from 'semantic-ui-react'
 import './cart.css'
 import CartItemCard from './CartItemCard'
 
@@ -21,16 +21,16 @@ class PaymentForm extends Component {
         <Segment>
             <Grid columns={2} relaxed='very'>
                 <Grid.Column >   
-                    <div className = "order-summary">
-                        <h1 className = "order-summary">Order Summary</h1>
+                    <div className = 'order-summary'>
+                        <h1 className = 'order-summary'>Order Summary</h1>
                     </div>
-                    <div className = "order-summary-topdiv">
+                    <div className = 'order-summary-topdiv'>
                         {this.props.cartItems.map((cartItem) => <CartItemCard cartItem = {cartItem}></CartItemCard>)}
                     </div>
                     <div>
-                        <div className= "sum-price-title">
+                        <div className= 'sum-price-title'>
                             <h3>Billing Summary</h3>
-                            <table id = "customers">
+                            <table id = 'customers'>
                             <tr >
                                 <td >Subtotal:</td>
                                 <td >${this.props.cartSum}</td>
@@ -54,22 +54,22 @@ class PaymentForm extends Component {
                 </div>  
                 </Grid.Column>
                 <Grid.Column>
-                    <div className = "billing">
-                        <h2 className = "billing">Billing Information</h2>
+                    <div className = 'billing'>
+                        <h2 className = 'billing'>Billing Information</h2>
                     </div> 
-                    <Form className = "payment-form">
+                    <Form className = 'payment-form'>
                         <Form.Group unstackable widths={2}>
-                            <Form.Input width = {8} size = "small" label='First name' placeholder='First name' />
-                            <Form.Input label='Last name' size = "small" placeholder='Last name' />
+                            <Form.Input width = {8} size = 'small' label='First name' placeholder='First name' />
+                            <Form.Input label='Last name' size = 'small' placeholder='Last name' />
                         </Form.Group>
                     <br></br>
                     <br></br>
                         <Form.Group  center>
-                            <Form.Input width = {12} size = "small" label='Credit Card Number' placeholder='Credit Card Number' />
-                            <Form.Input width = {2} size = "small" label='Exp' placeholder='MM/YY'/>
-                            <Form.Input width = {2} size = "small" label='CVC' placeholder='CVC'/>
+                            <Form.Input width = {12} size = 'small' label='Credit Card Number' placeholder='Credit Card Number' />
+                            <Form.Input width = {2} size = 'small' label='Exp' placeholder='MM/YY'/>
+                            <Form.Input width = {2} size = 'small' label='CVC' placeholder='CVC'/>
                         </Form.Group>
-                        <Form.Field size = "small" label='Card Type' control='select'>
+                        <Form.Field size = 'small' label='Card Type' control='select'>
                             <option >- -</option>
                             <option value='Mastercard'>Mastercard</option>
                             <option value='Visa'>Visa</option>
@@ -79,12 +79,12 @@ class PaymentForm extends Component {
                     <br></br>
                     <br></br>
                         <Form.Group>
-                            <Form.Input size = "small" width ={14} label='Address' placeholder='Address' />
-                            <Form.Input size = "small" width ={2} label='Apt/Floor'  />
+                            <Form.Input size = 'small' width ={14} label='Address' placeholder='Address' />
+                            <Form.Input size = 'small' width ={2} label='Apt/Floor'  />
                         </Form.Group>
                         <Form.Group >
-                            <Form.Input size = "small" label='State' placeholder='State' />
-                            <Form.Input size = "small" label='Zip Code' placeholder='Zip Code' />
+                            <Form.Input size = 'small' label='State' placeholder='State' />
+                            <Form.Input size = 'small' label='Zip Code' placeholder='Zip Code' />
                         </Form.Group>
                     <br></br>
                         <Form.Checkbox label='I agree to the Terms and Conditions' />
